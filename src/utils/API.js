@@ -10,6 +10,10 @@ const headers = {
     'Authorization': token
 }
 
+const generateID = () => {
+    return Math.random().toString(36).substr(2, 9)
+}
+
 export const getInitialData = () => {
     return Promise.all([
         fetchCategories(),
@@ -23,6 +27,38 @@ export const getInitialDataCategory = (category) => {
         fetchPostsCategorie(category),
     ])
 }
+
+export const voteOnPost = (post_id, option) =>
+    fetch(`${api}/posts/${post_id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify({ option })
+    }).then(res => res.json())
+
+export const addPostToServer = (post_data) =>
+    fetch(`${api}/posts`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: generateID(),
+            ...post_data
+        })
+    }).then(res => res.json())
+
+export const deletePostFromServer = (post_id) =>
+    fetch(`${api}/posts/${post_id}`, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+    }).then(res => res.json())
 
 const fetchPosts = () =>
     fetch(`${api}/posts`, { headers })

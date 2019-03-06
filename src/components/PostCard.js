@@ -1,9 +1,40 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { FaRegThumbsUp, FaRegThumbsDown, FaComments, FaEdit, FaRegTrashAlt, FaRegCalendarAlt } from "react-icons/fa";
+import { handleDownVotePost, handleUpVotePost, handleDeletePost } from '../actions/PostActions';
 
 class PostCard extends Component {
+    handleDownVotePost = (e) => {
+        e.preventDefault()
+
+        const { dispatch, post } = this.props
+
+        dispatch(handleDownVotePost({
+            id: post.id
+        }))
+    }
+
+    handleUpVotePost = (e) => {
+        e.preventDefault()
+
+        const { dispatch, post } = this.props
+
+        dispatch(handleUpVotePost({
+            id: post.id
+        }))
+    }
+
+    handlePostDelete = (e) => {
+        e.preventDefault()
+
+        const { dispatch, post } = this.props
+
+        dispatch(handleDeletePost({
+            id: post.id,
+            post: post
+        }))
+    }
     render() {
         const { post } = this.props
         const {
@@ -24,13 +55,13 @@ class PostCard extends Component {
                         </div>
                     </div>
                     <button className="td p-opt"><FaEdit />Edit</button>
-                    <button className="td p-opt-delete" ><FaRegTrashAlt />Excluir</button>
+                    <button className="td p-opt-delete" onClick={this.handlePostDelete}><FaRegTrashAlt />Excluir</button>
                 </div>
                     <p>{body}</p>
                 <div>
                     <div className="p-acts">
-                        <button className="p-act like" ><FaRegThumbsUp /></button>
-                        <button className="p-act dislike" ><FaRegThumbsDown /></button>     <div className="comment"><FaComments /><span>{commentCount} comments</span></div>
+                        <button className="p-act like" onClick={this.handleUpVotePost}><FaRegThumbsUp /></button>
+                        <button className="p-act dislike" onClick={this.handleDownVotePost}><FaRegThumbsDown /></button>     <div className="comment"><FaComments /><span>{commentCount} comments</span></div>
                     </div>
                 </div>
             </div>
@@ -52,4 +83,4 @@ function mapStateToProps ({ posts }, {id}) {
 
 }
 
-export default connect(mapStateToProps)(PostCard)
+export default withRouter(connect(mapStateToProps)(PostCard))

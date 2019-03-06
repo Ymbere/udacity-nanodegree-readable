@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from "react-redux";
+import LoadingBar from 'react-redux-loading'
 
 import { handleInitialData } from '../actions/Shared'
 
-import LoadingBar from 'react-redux-loading'
 import NewPostForm from './NewPostForm';
 import Header from './Header';
 import Footer from './Footer';
