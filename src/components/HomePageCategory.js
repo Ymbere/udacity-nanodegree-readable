@@ -58,12 +58,12 @@ class HomePage extends Component {
     }
 }
 
-const mapStateToProps = ({posts, categories}) => {
+const mapStateToProps = ({posts, categories, loadingBar}) => {
 
     return {
         posts,
         categories,
-        loading: categories.length === 0
+        loading: loadingBar.default !== 0 || loadingBar.default === {}
     }
 }
 

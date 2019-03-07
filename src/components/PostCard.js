@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { FaRegThumbsUp, FaRegThumbsDown, FaComments, FaEdit, FaRegTrashAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { handleDownVotePost, handleUpVotePost, handleDeletePost } from '../actions/PostActions';
@@ -34,6 +34,8 @@ class PostCard extends Component {
             id: post.id,
             post: post
         }))
+
+        this.props.history.push('/');
     }
     render() {
         const { post } = this.props
@@ -45,7 +47,7 @@ class PostCard extends Component {
                 <div className="tb">
                     <div className="td p-r-hdr">
                         <div className="p-u-info">
-                            <Link to={`/posts/${id}`}>{title}</Link>
+                            <Link to={`/${category}/${id}`}>{title}</Link>
                         </div>
                         <div className="p-dt">
                             <FaRegCalendarAlt />

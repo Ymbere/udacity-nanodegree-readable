@@ -7,11 +7,19 @@ export const DOWN_VOTE_POST               = 'DOWN_VOTE_POST'
 export const DELETE_POST                  = 'DELETE_POST'
 export const SORT_POST_BY_TIMESTAMP       = 'SORT_POST_BY_TIMESTAMP'
 export const SORT_POST_BY_VOTESCORE       = 'SORT_POST_BY_VOTESCORE'
+export const RECEIVE_POST_COMMENTS        = 'RECEIVE_POST_COMMENTS'
 
 export function receive_posts (posts) {
     return {
         type: RECEIVE_POSTS,
         posts
+    }
+}
+
+export function receive_post_comments (comments) {
+    return {
+        type: RECEIVE_POST_COMMENTS,
+        comments
     }
 }
 

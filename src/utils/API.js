@@ -28,6 +28,13 @@ export const getInitialDataCategory = (category) => {
     ])
 }
 
+export const getInitialDataPost = (post_id) => {
+    return Promise.all([
+        fetchPostByID(post_id),
+        fetchPostComments(post_id)
+    ])
+}
+
 export const voteOnPost = (post_id, option) =>
     fetch(`${api}/posts/${post_id}`, {
         method: 'POST',
@@ -72,5 +79,15 @@ const fetchCategories = () =>
 
 const fetchPostsCategorie = (category) =>
     fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+const fetchPostByID = (post_id) =>
+    fetch(`${api}/posts/${post_id}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+const fetchPostComments = (post_id) =>
+    fetch(`${api}/posts/${post_id}/comments`, { headers })
     .then(res => res.json())
     .then(data => data)

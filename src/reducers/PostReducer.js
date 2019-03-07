@@ -2,6 +2,7 @@ import {
     RECEIVE_POSTS, ADD_POST, UP_VOTE_POST, DOWN_VOTE_POST, DELETE_POST,
     SORT_POST_BY_TIMESTAMP,
     SORT_POST_BY_VOTESCORE,
+    RECEIVE_POST_COMMENTS,
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -29,6 +30,15 @@ export default function posts (state=[], action){
                     post.voteScore -= 1
                 }
                 return post
+            })
+
+        case RECEIVE_POST_COMMENTS :
+            return state.map(post => {
+                return {
+                    ...post,
+                    loading: false,
+                    postComments: action.comments
+                }
             })
 
         case DELETE_POST :
