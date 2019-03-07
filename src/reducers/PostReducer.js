@@ -19,7 +19,9 @@ export default function posts (state=[], action){
         case UP_VOTE_POST :
             return state.map(post => {
                 if (post.id === action.id){
-                    post.voteScore += 1
+                    return {
+                        post.voteScore += 1
+                    }
                 }
                 return post
             })
@@ -27,7 +29,9 @@ export default function posts (state=[], action){
         case DOWN_VOTE_POST :
             return state.map(post => {
                 if (post.id === action.id){
-                    post.voteScore -= 1
+                    return {
+                        post.voteScore -= 1
+                    }
                 }
                 return post
             })
