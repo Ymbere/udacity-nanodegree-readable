@@ -68,8 +68,30 @@ export const addPostToServer = (post_data) =>
         })
     }).then(res => res.json())
 
+export const addCommentToServer = (comment_data) =>
+    fetch(`${api}/comments`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id:generateID(),
+            ...comment_data
+        })
+    }).then(res => res.json())
+
 export const deletePostFromServer = (post_id) =>
     fetch(`${api}/posts/${post_id}`, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+    }).then(res => res.json())
+
+export const deleteCommentFromServer = (post_id) =>
+    fetch(`${api}/comments/${post_id}`, {
         method: 'DELETE',
         headers: {
             ...headers,

@@ -1,4 +1,4 @@
-import { addPostToServer, voteOnPost, deletePostFromServer, voteOnPostComment } from '../utils/API'
+import { addPostToServer, voteOnPost, deletePostFromServer, voteOnPostComment, addCommentToServer, deleteCommentFromServer } from '../utils/API'
 
 export const RECEIVE_POSTS                = 'RECEIVE_POSTS'
 export const ADD_POST                     = 'ADD_POST'
@@ -10,6 +10,8 @@ export const SORT_POST_BY_VOTESCORE       = 'SORT_POST_BY_VOTESCORE'
 export const RECEIVE_POST_COMMENTS        = 'RECEIVE_POST_COMMENTS'
 export const UP_VOTE_POST_COMMENT         = 'UP_VOTE_POST_COMMENT'
 export const DOWN_VOTE_POST_COMMENT       = 'DOWN_VOTE_POST_COMMENT'
+export const ADD_COMMENT                  = 'ADD_COMMENT'
+export const DELETE_COMMENT               = 'DELETE_COMMENT'
 
 export function receive_posts (posts) {
     return {
@@ -32,6 +34,13 @@ function addPost ( post ) {
     }
 }
 
+function addComment ( comment_info ) {
+    return {
+        type: ADD_COMMENT,
+        comment_info
+    }
+}
+
 function upVotePost ({ id }) {
     return {
         type: UP_VOTE_POST,
@@ -51,6 +60,15 @@ function deletePost ({ id, post }) {
         type: DELETE_POST,
         id,
         post
+    }
+}
+
+function deleteComment ({ comment_id, post_id, comment }) {
+    return {
+        type: DELETE_COMMENT,
+        comment_id,
+        post_id,
+        comment
     }
 }
 
@@ -94,6 +112,16 @@ export function handleAddPost(post_info) {
     }
 }
 
+export function handleAddComment(comment_info) {
+    return (dispatch) => {
+        return addCommentToServer(comment_info)
+            .then((comment) => dispatch(addComment(comment)))
+                .catch((e) => {
+                    console.warn('Error in handleAddComent: ', e)
+                })
+    }
+}
+
 export function handleUpVotePost (post_info) {
     return (dispatch) => {
         dispatch(upVotePost(post_info))
@@ -129,6 +157,19 @@ export function handleDeletePost (post_info) {
                 console.warn('Error in handleDeletePost: ', e)
                 dispatch(addPost(post_info.post))
                 alert('Error ocurred in post deletion try again later')
+            })
+    }
+}
+
+export function handleDeleteComment (comment_info) {
+    return (dispatch) => {
+        dispatch(deleteComment(comment_info))
+
+        return deleteCommentFromServer (comment_info.comment_id)
+            .catch((e) => {
+                console.warn('Error in handleDeleteComment: ', e)
+                dispatch(addComment(comment_info.comment))
+                alert('Error ocurred in comment deletion try again later')
             })
     }
 }

@@ -26,7 +26,7 @@ class PostDetail extends Component {
                     <div className="tb">
                         <div className="tb" id="m-col">
                             <div>
-                                <PostCard id={post.id} showPostBody={1}/>
+                                <PostCard id={post.id} showPostBody={1} showCommentForm={1}/>
                                 <Filter />
                                 <ComentList comments={post.postComments} />
                             </div>

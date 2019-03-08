@@ -4,7 +4,9 @@ import {
     SORT_POST_BY_VOTESCORE,
     RECEIVE_POST_COMMENTS,
     UP_VOTE_POST_COMMENT,
-    DOWN_VOTE_POST_COMMENT
+    DOWN_VOTE_POST_COMMENT,
+    ADD_COMMENT,
+    DELETE_COMMENT
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -85,6 +87,35 @@ export default function posts (state=[], action){
                         }
                         return pc
                     })
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case ADD_COMMENT :
+            return state.map(post => {
+                if (post.id === action.comment_info.parentId) {
+                    let newPostComments = post.postComments
+                    newPostComments = newPostComments.concat(action.comment_info)
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case DELETE_COMMENT :
+            return state.map(post => {
+                if (post.id === action.post_id) {
+                    let newPostComments = post.postComments
+
+                    newPostComments = newPostComments.filter(pc => pc.id !== action.comment_id)
 
                     return {
                         ...post,

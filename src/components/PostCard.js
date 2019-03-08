@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { FaRegThumbsUp, FaRegThumbsDown, FaComments, FaEdit, FaRegTrashAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { handleDownVotePost, handleUpVotePost, handleDeletePost } from '../actions/PostActions';
+import NewCommentForm from './NewCommentForm';
 
 class PostCard extends Component {
     handleDownVotePost = (e) => {
@@ -38,7 +39,7 @@ class PostCard extends Component {
         this.props.history.push('/');
     }
     render() {
-        const { post, showPostBody } = this.props
+        const { post, showPostBody, showCommentForm } = this.props
         const {
             author, body, category, commentCount, id, timestamp, title, voteScore
         } = post
@@ -66,12 +67,15 @@ class PostCard extends Component {
                         <button className="p-act dislike" onClick={this.handleDownVotePost}><FaRegThumbsDown /></button>     <div className="comment"><FaComments /><span>{commentCount} comments</span></div>
                     </div>
                 </div>
+                {showCommentForm &&
+                    <NewCommentForm parentId={id} />
+                }
             </div>
         )
     }
 }
 
-function mapStateToProps ({ posts }, {id, showPostBody}) {
+function mapStateToProps ({ posts }, {id, showPostBody, showCommentForm}) {
     let post = null
     if (Array.isArray(posts)) {
         post = posts.find(p => p.id === id)
@@ -81,7 +85,8 @@ function mapStateToProps ({ posts }, {id, showPostBody}) {
 
     return {
         post,
-        showPostBody
+        showPostBody,
+        showCommentForm
     }
 
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 //icons
 import { FaRegThumbsUp, FaRegThumbsDown, FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import { handleUpVoteComment, handleDownVoteComment } from '../actions/PostActions';
+import { handleUpVoteComment, handleDownVoteComment, handleDeleteComment } from '../actions/PostActions';
 
 class CommentCard extends Component {
     handleUpVoteComment = (e) => {
@@ -27,6 +27,18 @@ class CommentCard extends Component {
             post_id: comment.parentId
         }))
     }
+
+    handleDeletePostComment = (e) => {
+        e.preventDefault()
+
+        const { dispatch, comment} = this.props
+
+        dispatch(handleDeleteComment({
+            comment_id: comment.id,
+            post_id: comment.parentId,
+            comment: comment
+        }))
+    }
     render() {
         const { comment } = this.props
         const { author, body, timestamp, voteScore } = comment
@@ -44,7 +56,7 @@ class CommentCard extends Component {
                             </div>
                         </div>
                         <button className="td p-opt"><FaEdit />Edit</button>
-                        <button className="td p-opt-delete"><FaRegTrashAlt />Excluir</button>
+                        <button className="td p-opt-delete" onClick={this.handleDeletePostComment}><FaRegTrashAlt />Excluir</button>
                     </div>
                     <div>
                         <div className="p-acts">
