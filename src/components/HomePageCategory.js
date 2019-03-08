@@ -10,6 +10,7 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Filter from './Filter';
 import PostList from './PostList';
+import { sortPostByTimestamp, sortPostByVoteScore } from '../actions/PostActions';
 
 class HomePage extends Component {
     componentDidMount() {
@@ -24,6 +25,16 @@ class HomePage extends Component {
         }
     }
 
+    handleSortPosts = (sort_value) => {
+        const { dispatch } = this.props
+
+        if (sort_value === "timestamp") {
+            dispatch(sortPostByTimestamp( sort_value ))
+        } else if (sort_value === "voteScore") {
+            dispatch(sortPostByVoteScore( sort_value ))
+        }
+    }
+
     renderUI = () =>  {
         const { posts, categories } = this.props
         return (
@@ -35,7 +46,7 @@ class HomePage extends Component {
                         <Sidebar categories={categories} />
                         <div className="td" id="m-col">
                             <NewPostForm />
-                            <Filter />
+                            <Filter sortFunction={this.handleSortPosts} />
                             <PostList posts={posts} />
                         </div>
                     </div>

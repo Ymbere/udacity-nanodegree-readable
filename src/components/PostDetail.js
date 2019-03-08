@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { LoadingBar } from 'react-redux-loading';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 //Components
 import Header from './Header';
@@ -9,6 +8,7 @@ import Footer from './Footer';
 import PostCard from './PostCard';
 import ComentList from './ComentsList';
 import { handleInitialDataPost } from '../actions/Shared';
+import Filter from './Filter';
 
 class PostDetail extends Component {
     componentDidMount() {
@@ -26,7 +26,8 @@ class PostDetail extends Component {
                     <div className="tb">
                         <div className="tb" id="m-col">
                             <div>
-                                <PostCard id={post.id} />
+                                <PostCard id={post.id} showPostBody={1}/>
+                                <Filter />
                                 <ComentList comments={post.postComments} />
                             </div>
                         </div>
@@ -56,4 +57,4 @@ const mapStateToProps = ({ posts }) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(PostDetail))
+export default connect(mapStateToProps)(PostDetail)

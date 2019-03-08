@@ -3,8 +3,30 @@ import { connect } from 'react-redux'
 
 //icons
 import { FaRegThumbsUp, FaRegThumbsDown, FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import { handleUpVoteComment, handleDownVoteComment } from '../actions/PostActions';
 
 class CommentCard extends Component {
+    handleUpVoteComment = (e) => {
+        e.preventDefault()
+
+        const { dispatch, comment } = this.props
+
+        dispatch(handleUpVoteComment({
+            comment_id: comment.id,
+            post_id: comment.parentId
+        }))
+    }
+
+    handleDownVoteComment = (e) => {
+        e.preventDefault()
+
+        const { dispatch, comment } = this.props
+
+        dispatch(handleDownVoteComment({
+            comment_id: comment.id,
+            post_id: comment.parentId
+        }))
+    }
     render() {
         const { comment } = this.props
         const { author, body, timestamp, voteScore } = comment
@@ -26,8 +48,8 @@ class CommentCard extends Component {
                     </div>
                     <div>
                         <div className="p-acts">
-                            <button className="p-act like"><FaRegThumbsUp /></button>
-                            <button className="p-act dislike"><FaRegThumbsDown /></button>
+                            <button className="p-act like" onClick={this.handleUpVoteComment}><FaRegThumbsUp /></button>
+                            <button className="p-act dislike" onClick={this.handleDownVoteComment}><FaRegThumbsDown /></button>
                         </div>
                     </div>
                 </div>

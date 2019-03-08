@@ -3,6 +3,8 @@ import {
     SORT_POST_BY_TIMESTAMP,
     SORT_POST_BY_VOTESCORE,
     RECEIVE_POST_COMMENTS,
+    UP_VOTE_POST_COMMENT,
+    DOWN_VOTE_POST_COMMENT
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -42,9 +44,54 @@ export default function posts (state=[], action){
             return state.map(post => {
                 return {
                     ...post,
-                    loading: false,
                     postComments: action.comments
                 }
+            })
+
+        case UP_VOTE_POST_COMMENT :
+            return state.map(post => {
+                if (post.id === action.post_id) {
+                    let newPostComments = post.postComments;
+
+                    newPostComments = newPostComments.map(pc => {
+                        if (pc.id === action.comment_id) {
+                            return {
+                                ...pc,
+                                voteScore: pc.voteScore + 1
+                            }
+                        }
+                        return pc
+                    })
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case DOWN_VOTE_POST_COMMENT :
+            return state.map(post => {
+                if (post.id === action.post_id) {
+                    let newPostComments = post.postComments;
+
+                    newPostComments = newPostComments.map(pc => {
+                        if (pc.id === action.comment_id) {
+                            return {
+                                ...pc,
+                                voteScore: pc.voteScore - 1
+                            }
+                        }
+                        return pc
+                    })
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
             })
 
         case DELETE_POST :

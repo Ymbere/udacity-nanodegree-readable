@@ -45,6 +45,16 @@ export const voteOnPost = (post_id, option) =>
         body: JSON.stringify({ option })
     }).then(res => res.json())
 
+export const voteOnPostComment = (comment_id, option) =>
+    fetch(`${api}/comments/${comment_id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify({ option })
+    }).then(res => res.json())
+
 export const addPostToServer = (post_data) =>
     fetch(`${api}/posts`, {
         method: 'POST',

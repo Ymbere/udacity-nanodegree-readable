@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { FaRegThumbsUp, FaRegThumbsDown, FaComments, FaEdit, FaRegTrashAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { handleDownVotePost, handleUpVotePost, handleDeletePost } from '../actions/PostActions';
@@ -38,7 +38,7 @@ class PostCard extends Component {
         this.props.history.push('/');
     }
     render() {
-        const { post } = this.props
+        const { post, showPostBody } = this.props
         const {
             author, body, category, commentCount, id, timestamp, title, voteScore
         } = post
@@ -59,7 +59,7 @@ class PostCard extends Component {
                     <button className="td p-opt"><FaEdit />Edit</button>
                     <button className="td p-opt-delete" onClick={this.handlePostDelete}><FaRegTrashAlt />Excluir</button>
                 </div>
-                    <p>{body}</p>
+                    {showPostBody && <p>{body}</p> }
                 <div>
                     <div className="p-acts">
                         <button className="p-act like" onClick={this.handleUpVotePost}><FaRegThumbsUp /></button>
@@ -71,7 +71,7 @@ class PostCard extends Component {
     }
 }
 
-function mapStateToProps ({ posts }, {id}) {
+function mapStateToProps ({ posts }, {id, showPostBody}) {
     let post = null
     if (Array.isArray(posts)) {
         post = posts.find(p => p.id === id)
@@ -80,7 +80,8 @@ function mapStateToProps ({ posts }, {id}) {
     }
 
     return {
-        post
+        post,
+        showPostBody
     }
 
 }

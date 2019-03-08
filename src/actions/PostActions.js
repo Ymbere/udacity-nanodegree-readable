@@ -1,4 +1,4 @@
-import { addPostToServer, voteOnPost, deletePostFromServer } from '../utils/API'
+import { addPostToServer, voteOnPost, deletePostFromServer, voteOnPostComment } from '../utils/API'
 
 export const RECEIVE_POSTS                = 'RECEIVE_POSTS'
 export const ADD_POST                     = 'ADD_POST'
@@ -8,6 +8,8 @@ export const DELETE_POST                  = 'DELETE_POST'
 export const SORT_POST_BY_TIMESTAMP       = 'SORT_POST_BY_TIMESTAMP'
 export const SORT_POST_BY_VOTESCORE       = 'SORT_POST_BY_VOTESCORE'
 export const RECEIVE_POST_COMMENTS        = 'RECEIVE_POST_COMMENTS'
+export const UP_VOTE_POST_COMMENT         = 'UP_VOTE_POST_COMMENT'
+export const DOWN_VOTE_POST_COMMENT       = 'DOWN_VOTE_POST_COMMENT'
 
 export function receive_posts (posts) {
     return {
@@ -66,6 +68,22 @@ export function sortPostByVoteScore ( optionValue ){
     }
 }
 
+export function upVotePostComments ({ comment_id, post_id }) {
+    return {
+        type: UP_VOTE_POST_COMMENT,
+        comment_id,
+        post_id
+    }
+}
+
+export function downVotePostComments ({ comment_id, post_id}) {
+    return {
+        type: DOWN_VOTE_POST_COMMENT,
+        comment_id,
+        post_id
+    }
+}
+
 export function handleAddPost(post_info) {
     return (dispatch) => {
         return addPostToServer (post_info)
@@ -111,6 +129,32 @@ export function handleDeletePost (post_info) {
                 console.warn('Error in handleDeletePost: ', e)
                 dispatch(addPost(post_info.post))
                 alert('Error ocurred in post deletion try again later')
+            })
+    }
+}
+
+export function handleUpVoteComment (comment_info) {
+    return (dispatch) => {
+        dispatch(upVotePostComments(comment_info))
+
+        return voteOnPostComment (comment_info.comment_id, 'upVote')
+            .catch((e) => {
+                console.warn('Error in handleUpVoteComment: ', e)
+                dispatch(downVotePostComments(comment_info))
+                alert('Error ocurred in Up Voating the Comment')
+            })
+    }
+}
+
+export function handleDownVoteComment (comment_info) {
+    return (dispatch) => {
+        dispatch(downVotePostComments(comment_info))
+
+        return voteOnPostComment (comment_info.comment_id, 'downVote')
+            .catch((e) => {
+                console.log('Error in handleDownVoteComment: ', e)
+                dispatch(upVotePostComments(comment_info))
+                alert('Error ocurred in Down Voating the Comment')
             })
     }
 }
