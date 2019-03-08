@@ -20,7 +20,8 @@ export default function posts (state=[], action){
             return state.map(post => {
                 if (post.id === action.id){
                     return {
-                        post.voteScore += 1
+                        ...post,
+                        voteScore: post.voteScore + 1
                     }
                 }
                 return post
@@ -30,7 +31,8 @@ export default function posts (state=[], action){
             return state.map(post => {
                 if (post.id === action.id){
                     return {
-                        post.voteScore -= 1
+                        ...post,
+                        voteScore: post.voteScore - 1
                     }
                 }
                 return post
