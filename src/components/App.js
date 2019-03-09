@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './HomePage';
 import HomePageCategory from './HomePageCategory';
 import PostDetail from './PostDetail';
+import NotFound from './NotFound';
 
 class App extends Component {
     render() {
@@ -22,6 +23,10 @@ class App extends Component {
                     <Route
                         exact path={'/:category/:id'}
                         component={PostDetail}
+                    />
+                    <Route
+                        exact path="/error"
+                        component={NotFound}
                     />
                 </Switch>
             </Router>

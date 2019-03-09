@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 //icons
-import { FaRegThumbsUp, FaRegThumbsDown, FaEdit, FaRegTrashAlt, FaRegTired } from "react-icons/fa";
+import { FaRegThumbsUp, FaRegThumbsDown, FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { handleUpVoteComment, handleDownVoteComment, handleDeleteComment } from '../actions/PostActions';
-import NewCommentForm from './NewCommentForm';
 import EditComment from './EditComment';
 
 class CommentCard extends Component {
