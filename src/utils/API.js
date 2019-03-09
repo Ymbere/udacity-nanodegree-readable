@@ -1,4 +1,4 @@
-const api = "https://reactnd-forum-api.herokuapp.com"
+const api = "http://localhost:3001"
 
 let token = localStorage.token
 
