@@ -11,7 +11,6 @@ class NewPostForm extends Component {
         body: '',
         author: '',
         category: '',
-        timestamp: Date.now()
     }
 
     checkInputs = () => {
@@ -41,9 +40,11 @@ class NewPostForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const { title, body, author, category, timestamp } = this.state
+        const { title, body, author, category } = this.state
 
         const { dispatch } = this.props
+
+        const timestamp = Date.now()
 
         dispatch(handleAddPost({
             title,
@@ -57,7 +58,6 @@ class NewPostForm extends Component {
             title: '',
             body: '',
             author: '',
-            category: ''
         }))
     }
 

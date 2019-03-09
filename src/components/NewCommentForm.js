@@ -5,8 +5,7 @@ import { connect } from 'react-redux'
 class NewCommentForm extends Component {
     state = {
         author: '',
-        body: '',
-        timestamp: Date.now()
+        body: ''
     }
     checkInputs = () => {
         const { author, body } = this.state
@@ -26,8 +25,10 @@ class NewCommentForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const { author, body, timestamp } = this.state
+        const { author, body } = this.state
         const { dispatch, parentId } = this.props
+
+        const timestamp = Date.now()
 
         dispatch(handleAddComment({
             author,
