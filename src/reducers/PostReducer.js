@@ -6,7 +6,9 @@ import {
     UP_VOTE_POST_COMMENT,
     DOWN_VOTE_POST_COMMENT,
     ADD_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    SORT_COMMENT_BY_TIMESTAMP,
+    SORT_COMMENT_BY_VOTESCORE
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -116,6 +118,36 @@ export default function posts (state=[], action){
                     let newPostComments = post.postComments
 
                     newPostComments = newPostComments.filter(pc => pc.id !== action.comment_id)
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case SORT_COMMENT_BY_TIMESTAMP :
+            return state.map(post => {
+                if (post.id === action.post_id) {
+                    let newPostComments = post.postComments
+
+                    newPostComments = newPostComments.sort((a,b) => b.timestamp - a.timestamp)
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case SORT_COMMENT_BY_VOTESCORE :
+            return state.map(post => {
+                if (post.id === action.post_id) {
+                    let newPostComments = post.postComments
+
+                    newPostComments = newPostComments.sort((a,b) => b.voteScore - a.voteScore)
 
                     return {
                         ...post,

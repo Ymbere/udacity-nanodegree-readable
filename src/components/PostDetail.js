@@ -9,11 +9,22 @@ import PostCard from './PostCard';
 import ComentList from './ComentsList';
 import { handleInitialDataPost } from '../actions/Shared';
 import Filter from './Filter';
+import { sortCommentByVoteScore, sortCommentByTimestamp } from '../actions/PostActions';
 
 class PostDetail extends Component {
     componentDidMount() {
         const postID = this.props.match.params.id
         this.props.dispatch(handleInitialDataPost(postID))
+    }
+
+    handleSortComments = (sort_value) => {
+        const { dispatch, post } = this.props
+
+        if (sort_value === "timestamp") {
+            dispatch(sortCommentByTimestamp(sort_value, post.id))
+        } else if (sort_value === "voteScore") {
+            dispatch(sortCommentByVoteScore(sort_value, post.id))
+        }
     }
 
     renderUI = () => {
@@ -27,7 +38,7 @@ class PostDetail extends Component {
                         <div className="tb" id="m-col">
                             <div>
                                 <PostCard id={post.id} showPostBody={1} showCommentForm={1}/>
-                                <Filter />
+                                <Filter sortFunction={this.handleSortComments} />
                                 <ComentList comments={post.postComments} />
                             </div>
                         </div>

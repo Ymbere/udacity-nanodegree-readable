@@ -12,6 +12,8 @@ export const UP_VOTE_POST_COMMENT         = 'UP_VOTE_POST_COMMENT'
 export const DOWN_VOTE_POST_COMMENT       = 'DOWN_VOTE_POST_COMMENT'
 export const ADD_COMMENT                  = 'ADD_COMMENT'
 export const DELETE_COMMENT               = 'DELETE_COMMENT'
+export const SORT_COMMENT_BY_TIMESTAMP    = 'SORT_COMMENT_BY_TIMESTAMP'
+export const SORT_COMMENT_BY_VOTESCORE    = 'SORT_COMMENT_BY_VOTESCORE'
 
 export function receive_posts (posts) {
     return {
@@ -83,6 +85,22 @@ export function sortPostByVoteScore ( optionValue ){
     return {
         type: SORT_POST_BY_VOTESCORE,
         optionValue
+    }
+}
+
+export function sortCommentByTimestamp ( optionValue, post_id ) {
+    return {
+        type: SORT_COMMENT_BY_TIMESTAMP,
+        optionValue,
+        post_id
+    }
+}
+
+export function sortCommentByVoteScore ( optionValue, post_id ) {
+    return {
+        type: SORT_COMMENT_BY_VOTESCORE,
+        optionValue,
+        post_id
     }
 }
 
