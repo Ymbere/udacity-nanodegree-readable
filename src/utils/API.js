@@ -68,16 +68,15 @@ export const addPostToServer = (post_data) =>
         })
     }).then(res => res.json())
 
-export const editPostFromServer = (post_id, post_title, post_body) =>
-    fetch (`${api}/posts/${post_id}`, {
+export const editPostFromServer = (post_data) =>
+    fetch (`${api}/posts/${post_data.id}`, {
         method: 'PUT',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            post_title,
-            post_body
+            ...post_data
         })
     }).then(res => res.json())
 

@@ -4,8 +4,7 @@ import { handleEditPostComments } from '../actions/PostActions';
 
 class EditComment extends Component {
     state = {
-        body: '',
-        timestamp: Date.now()
+        body: ''
     }
 
     componentDidMount() {
@@ -34,8 +33,10 @@ class EditComment extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const { body, timestamp } = this.state
+        const { body } = this.state
         const { dispatch, id } = this.props
+
+        const timestamp = Date.now()
 
         dispatch(handleEditPostComments({
             id,

@@ -9,7 +9,8 @@ import {
     DELETE_COMMENT,
     SORT_COMMENT_BY_TIMESTAMP,
     SORT_COMMENT_BY_VOTESCORE,
-    EDIT_COMMENT_OF_POST
+    EDIT_COMMENT_OF_POST,
+    EDIT_POST
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -178,6 +179,18 @@ export default function posts (state=[], action){
                     return {
                         ...post,
                         postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case EDIT_POST :
+            return state.map(post => {
+                if (post.id === action.post.id) {
+                    return {
+                        ...post,
+                        title: action.post.title,
+                        body: action.post.body
                     }
                 }
                 return post

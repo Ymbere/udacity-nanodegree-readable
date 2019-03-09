@@ -1,0 +1,211 @@
+*{
+    outline: none;
+}
+
+body{
+    margin:40px 0px;
+    background-color:#385591;
+}
+
+body, input, button{
+    font-family: Helvetica;
+}
+
+.tb{
+    display: table;
+    width: 100%;
+}
+
+.tr{
+    display: table-row;
+}
+
+.td{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+main{
+    width: 1280px;
+    margin: 0 auto;
+    background-color: #e9ebee;
+    box-shadow: 0px 8px 30px #1d2d4f;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.device-bar-1{
+    text-align: center;
+    color: #fff;
+    padding: 7px;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.device-bar-1 a{
+    color: #fff;
+    text-decoration-line: none;
+}
+
+#main-content{
+    padding: 55px 0px 0px 55px;
+}
+
+#l-col, #m-col, #r-col{
+    vertical-align: top;
+}
+
+#m-col{
+    padding: 0px 55px;
+}
+
+#l-col{
+    width: 340px;
+    padding-top: 6px;
+}
+
+.l-cnt{
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 3px 3px #ddd;
+}
+
+/* CODIGO CSS QUE PRECISA SER ALTERADO, O CODIGO JA EXISTE BASTA APENAS EXCLUIR O ANTERIOR E COLAR ESSE */
+.post{
+    padding: 35px;
+    background-color: #fff;
+    box-shadow: 0px 3px 3px #ddd;
+    margin-bottom: 60px;
+}
+/* CODIGO CSS QUE PRECISA SER ALTERADO, O CODIGO JA EXISTE BASTA APENAS EXCLUIR O ANTERIOR E COLAR ESSE */
+
+.post p {
+    margin-left: 18px;
+    margin-top: 9px;
+}
+
+.category-post{
+    border: 1px solid #a3a6aa;
+    border-radius: 2px;
+}
+
+.p-r-hdr{
+    vertical-align: top;
+    padding-left: 20px;
+}
+
+/* CODIGO CSS QUE PRECISA SER ALTERADO, O CODIGO JA EXISTE BASTA APENAS EXCLUIR O ANTERIOR E COLAR ESSE */
+.p-u-info{
+    color: #5a5959;
+    font-size: 20px;
+    margin-bottom: 7px;
+}
+/* CODIGO CSS QUE PRECISA SER ALTERADO, O CODIGO JA EXISTE BASTA APENAS EXCLUIR O ANTERIOR E COLAR ESSE */
+
+.p-u-info a{
+    color: #4267b2;
+}
+
+.p-dt{
+    color: #a8a8a8;
+    font-size: 13px;
+}
+
+.p-dt i{
+    font-size: 14px;
+    margin-right: 2px;
+}
+
+.p-dt span{
+    position: relative;
+    top: -2px;
+}
+
+.vote{
+    margin: 20px;
+}
+
+.p-opt{
+    text-align: center;
+    position: relative;
+    right: 60px;
+    width: 1px;
+    color: #ccc;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.p-opt-delete{
+    text-align: center;
+    position: relative;
+    right: 15px;
+    width: 1px;
+    color: #ccc;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.p-act{
+    width: 24px;
+    height: 24px;
+    color: #a3a6aa;
+    cursor: pointer;
+}
+
+.comment{
+    color: #a3a6aa;
+    cursor: pointer;
+}
+
+.p-act span{
+    position: relative;
+    top: 1px;
+    width: 20px;
+    font-size: 15px;
+    color: #a3a6aa;
+}
+
+.like{
+    margin-right: -5px;
+    margin-left: 20px;
+}
+
+.comment span{
+    width: 20px;
+    font-size: 15px;
+    color: #a3a6aa;
+}
+
+.like, .dislike, .commment{
+    width: 50px;
+    float: left;
+}
+
+.p-act i{
+    vertical-align: middle;
+}
+
+.like i, .dislike i, .comment i{
+    margin-right: 6px;
+}
+
+#btn-comment{
+    margin-left: 455px;
+}
+
+.device-bar-2{
+    padding: 9px 0px 13px 0px;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+}

@@ -4,8 +4,12 @@ import { connect } from 'react-redux'
 import { FaRegThumbsUp, FaRegThumbsDown, FaComments, FaEdit, FaRegTrashAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { handleDownVotePost, handleUpVotePost, handleDeletePost } from '../actions/PostActions';
 import NewCommentForm from './NewCommentForm';
+import EditPost from './EditPost';
 
 class PostCard extends Component {
+    state = {
+        edit: 0,
+    }
     handleDownVotePost = (e) => {
         e.preventDefault()
 
@@ -38,12 +42,26 @@ class PostCard extends Component {
 
         this.props.history.push('/');
     }
-    render() {
+
+    handleEdit = (e) => {
+        e.preventDefault()
+        this.setState({ edit: 1})
+    }
+
+    toggleToNormal = () => {
+        this.setState({
+            edit: 0
+        })
+    }
+
+    //Render UI
+
+    renderPostCard = () => {
         const { post, showPostBody, showCommentForm } = this.props
         const {
             author, body, category, commentCount, id, timestamp, title, voteScore
         } = post
-        return(
+        return (
             <div className="post">
                 <div className="tb">
                     <div className="td p-r-hdr">
@@ -57,7 +75,7 @@ class PostCard extends Component {
                             <span className="category-post">{category}</span>
                         </div>
                     </div>
-                    <button className="td p-opt"><FaEdit />Edit</button>
+                    <button className="td p-opt" onClick={this.handleEdit}><FaEdit />Edit</button>
                     <button className="td p-opt-delete" onClick={this.handlePostDelete}><FaRegTrashAlt />Excluir</button>
                 </div>
                     {showPostBody && <p>{body}</p> }
@@ -71,6 +89,21 @@ class PostCard extends Component {
                     <NewCommentForm parentId={id} />
                 }
             </div>
+        )
+    }
+    render() {
+        return(
+            <>
+                {this.state.edit === 0
+                    ? this.renderPostCard()
+                    : <EditPost
+                        title={this.props.post.title}
+                        body={this.props.post.body}
+                        id={this.props.post.id}
+                        toggle={this.toggleToNormal}
+                    />
+                }
+            </>
         )
     }
 }

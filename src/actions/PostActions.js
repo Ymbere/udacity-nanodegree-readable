@@ -18,6 +18,7 @@ export const DELETE_COMMENT               = 'DELETE_COMMENT'
 export const SORT_COMMENT_BY_TIMESTAMP    = 'SORT_COMMENT_BY_TIMESTAMP'
 export const SORT_COMMENT_BY_VOTESCORE    = 'SORT_COMMENT_BY_VOTESCORE'
 export const EDIT_COMMENT_OF_POST         = 'EDIT_COMMENT_OF_POST'
+export const EDIT_POST                    = 'EDIT_POST'
 
 export function receive_posts (posts) {
     return {
@@ -82,6 +83,13 @@ function editCommentOfPost ( comment ) {
     return {
         type: EDIT_COMMENT_OF_POST,
         comment
+    }
+}
+
+function editPost ( post ) {
+    return {
+        type: EDIT_POST,
+        post
     }
 }
 
@@ -235,6 +243,16 @@ export function handleEditPostComments (comment_info) {
             .then((comment) => dispatch(editCommentOfPost(comment)))
                 .catch((e) => {
                     console.warn('Error in handleEditPostComments: ', e)
+                })
+    }
+}
+
+export function handleEditPost (post_info) {
+    return(dispatch) => {
+        return editPostFromServer(post_info)
+            .then((post) => dispatch(editPost(post)))
+                .catch((e) => {
+                    console.warn('Error in handleEditPostCommets: ', e)
                 })
     }
 }

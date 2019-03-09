@@ -9,6 +9,11 @@ import middleware from './middleware'
 
 import App from './components/App';
 
+//css
+import '../src/assets/css/bootstrap.min.css'
+import '../src/assets/css/home.css'
+import '../src/assets/css/post.css'
+
 const store = createStore(reducers, middleware)
 
 ReactDOM.render(
