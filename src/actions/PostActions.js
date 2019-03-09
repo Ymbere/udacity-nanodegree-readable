@@ -230,7 +230,7 @@ export function handleDownVoteComment (comment_info) {
 
         return voteOnPostComment (comment_info.comment_id, 'downVote')
             .catch((e) => {
-                console.log('Error in handleDownVoteComment: ', e)
+                console.warn('Error in handleDownVoteComment: ', e)
                 dispatch(upVotePostComments(comment_info))
                 alert('Error ocurred in Down Voating the Comment')
             })
