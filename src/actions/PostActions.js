@@ -1,4 +1,7 @@
-import { addPostToServer, voteOnPost, deletePostFromServer, voteOnPostComment, addCommentToServer, deleteCommentFromServer } from '../utils/API'
+import { addPostToServer, voteOnPost, deletePostFromServer, voteOnPostComment,
+    addCommentToServer, deleteCommentFromServer, editPostFromServer,
+    editCommentFromServer
+} from '../utils/API'
 
 export const RECEIVE_POSTS                = 'RECEIVE_POSTS'
 export const ADD_POST                     = 'ADD_POST'
@@ -14,6 +17,7 @@ export const ADD_COMMENT                  = 'ADD_COMMENT'
 export const DELETE_COMMENT               = 'DELETE_COMMENT'
 export const SORT_COMMENT_BY_TIMESTAMP    = 'SORT_COMMENT_BY_TIMESTAMP'
 export const SORT_COMMENT_BY_VOTESCORE    = 'SORT_COMMENT_BY_VOTESCORE'
+export const EDIT_COMMENT_OF_POST         = 'EDIT_COMMENT_OF_POST'
 
 export function receive_posts (posts) {
     return {
@@ -70,6 +74,13 @@ function deleteComment ({ comment_id, post_id, comment }) {
         type: DELETE_COMMENT,
         comment_id,
         post_id,
+        comment
+    }
+}
+
+function editCommentOfPost ( comment ) {
+    return {
+        type: EDIT_COMMENT_OF_POST,
         comment
     }
 }
@@ -215,5 +226,15 @@ export function handleDownVoteComment (comment_info) {
                 dispatch(upVotePostComments(comment_info))
                 alert('Error ocurred in Down Voating the Comment')
             })
+    }
+}
+
+export function handleEditPostComments (comment_info) {
+    return (dispatch) => {
+        return editCommentFromServer(comment_info)
+            .then((comment) => dispatch(editCommentOfPost(comment)))
+                .catch((e) => {
+                    console.warn('Error in handleEditPostComments: ', e)
+                })
     }
 }

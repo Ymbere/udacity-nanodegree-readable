@@ -8,7 +8,8 @@ import {
     ADD_COMMENT,
     DELETE_COMMENT,
     SORT_COMMENT_BY_TIMESTAMP,
-    SORT_COMMENT_BY_VOTESCORE
+    SORT_COMMENT_BY_VOTESCORE,
+    EDIT_COMMENT_OF_POST
 } from '../actions/PostActions'
 
 export default function posts (state=[], action){
@@ -148,6 +149,31 @@ export default function posts (state=[], action){
                     let newPostComments = post.postComments
 
                     newPostComments = newPostComments.sort((a,b) => b.voteScore - a.voteScore)
+
+                    return {
+                        ...post,
+                        postComments: newPostComments
+                    }
+                }
+                return post
+            })
+
+        case EDIT_COMMENT_OF_POST :
+            return state.map(post => {
+                if (post.id === action.comment.parentId) {
+
+                    let newPostComments = post.postComments
+
+                    newPostComments = newPostComments.map( pc => {
+                        if (pc.id === action.comment.id) {
+                            return {
+                                ...pc,
+                                body: action.comment.body,
+                                timestamp: action.comment.timestamp
+                            }
+                        }
+                        return pc
+                    })
 
                     return {
                         ...post,

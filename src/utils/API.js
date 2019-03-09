@@ -68,6 +68,31 @@ export const addPostToServer = (post_data) =>
         })
     }).then(res => res.json())
 
+export const editPostFromServer = (post_id, post_title, post_body) =>
+    fetch (`${api}/posts/${post_id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            post_title,
+            post_body
+        })
+    }).then(res => res.json())
+
+export const editCommentFromServer = (comment_data) =>
+    fetch(`${api}/comments/${comment_data.id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ...comment_data
+        })
+    }).then(res => res.json())
+
 export const addCommentToServer = (comment_data) =>
     fetch(`${api}/comments`, {
         method: 'POST',
