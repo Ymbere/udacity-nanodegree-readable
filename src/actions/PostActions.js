@@ -70,11 +70,9 @@ function deletePost ({ id, post }) {
     }
 }
 
-function deleteComment ({ comment_id, post_id, comment }) {
+function deleteComment (comment) {
     return {
         type: DELETE_COMMENT,
-        comment_id,
-        post_id,
         comment
     }
 }
@@ -159,6 +157,17 @@ export function handleAddComment(comment_info) {
     }
 }
 
+export function handleDeleteComment (comment_info) {
+    return (dispatch) => {
+        return deleteCommentFromServer(comment_info.comment_id)
+            .then((comment) => dispatch(deleteComment(comment)))
+                .catch((e) => {
+                    console.warn('Error in handleDeleteComment: ', e)
+                })
+
+    }
+}
+
 export function handleUpVotePost (post_info) {
     return (dispatch) => {
         dispatch(upVotePost(post_info))
@@ -194,19 +203,6 @@ export function handleDeletePost (post_info) {
                 console.warn('Error in handleDeletePost: ', e)
                 dispatch(addPost(post_info.post))
                 alert('Error ocurred in post deletion try again later')
-            })
-    }
-}
-
-export function handleDeleteComment (comment_info) {
-    return (dispatch) => {
-        dispatch(deleteComment(comment_info))
-
-        return deleteCommentFromServer (comment_info.comment_id)
-            .catch((e) => {
-                console.warn('Error in handleDeleteComment: ', e)
-                dispatch(addComment(comment_info.comment))
-                alert('Error ocurred in comment deletion try again later')
             })
     }
 }

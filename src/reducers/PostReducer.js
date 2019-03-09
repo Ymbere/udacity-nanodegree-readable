@@ -108,6 +108,7 @@ export default function posts (state=[], action){
 
                     return {
                         ...post,
+                        commentCount: post.commentCount + 1,
                         postComments: newPostComments
                     }
                 }
@@ -116,13 +117,14 @@ export default function posts (state=[], action){
 
         case DELETE_COMMENT :
             return state.map(post => {
-                if (post.id === action.post_id) {
+                if (post.id === action.comment.parentId) {
                     let newPostComments = post.postComments
 
-                    newPostComments = newPostComments.filter(pc => pc.id !== action.comment_id)
+                    newPostComments = newPostComments.filter(pc => pc.id !== action.comment.id)
 
                     return {
                         ...post,
+                        commentCount: post.commentCount - 1,
                         postComments: newPostComments
                     }
                 }
