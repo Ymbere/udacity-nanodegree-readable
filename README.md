@@ -1,3 +1,86 @@
+# Readable Project
+Readable is the second project for the React Udacity Nanodegree program
+# Documentation
+
+## How to use
+
+### Run the frontend
+
+* Clone the frontend repository  `https://github.com/Ymbere/udacity-nanodegree-readable.git`.
+* Go to the app folder  `cd udacity-nanodegree-readable`
+* Install the dependencies `npm install`
+* Open the app on your browser on (http://localhost:3000/)
+
+### Run the backend server
+
+* Clone the backend server from this link `https://github.com/udacity/reactnd-project-readable-starter.git`
+* Go to the server folder `cd reactnd-project-readable-starter/api-server`
+* Install the depenencies `npm install`
+* Run the server `node server`
+
+---
+__Note__
+The API is configure to run in http://localhost:3001 but you can change it on API.js file on line 1
+
+____
+
+## What You're Gettng
+```bash
+
+├── node_modules
+├── public
+├── src
+│    ├── actions
+│    │    ├── CategoryActions.js #Contains the action creator for the categorys
+│    │    ├── PostActions.js    #Contains the action creator for post
+│    │    └── Shared.js #Contains shared actions creator
+│    │
+│    ├── assets
+│    │   └── css #Contains the css used in the app
+│    │       ├──bootstrap.min.css
+│    │       ├── home.css
+│    │       └── post.css
+│    │
+│    ├── components
+│    │   ├── App.js
+│    │   ├── ComentsList.js
+│    │   ├── CommentCard.js #Component that render a comment
+│    │   ├── EditComment.js
+│    │   ├── EditPost.js
+│    │   ├── Filter.js #Component that render the filter of posts and comments
+│    │   ├── Footer.js #Component that render the footer of the page
+│    │   ├── Header.js #Component that render the header of the page
+│    │   ├── HomePage.js
+│    │   ├── HomePageCategory.js
+│    │   ├── NewCommentForm.js #Component tha render a form to add a commment
+│    │   ├── NotFound.js #Component that render the not found page
+│    │   ├── PostCard.js #Component that render one post
+│    │   ├── PostDetails.js #Component that render the post detail page
+│    │   ├── PostList.js #Component that render a list os posts
+│    │   └── Sidebar.js #Component that render the sidebar with the categories
+│    │
+│    ├── middleware
+│    │   ├── index.js # This is where Redux 'applyMiddleware' is stored, it mix all middlewares used for this React-Redux Project
+│    │   └── logger.js # Redux Middleware to log all actions
+│    │
+│    ├── reducers
+│    │   ├── CategoryReducer.js # Contains the category reducer
+│    │   ├── index.js # This is where Redux 'combineReducers' is stored, it mix all reducers used for this React-Redux Project
+│    │   └── PostReducer.js # Contains the post reducer
+│    │
+│    ├── utils
+│    │   └── API.js # Contains the methods to connect with the backend API
+│    │
+│    ├── index.js
+│    └──
+├── .gitignore
+├──  package.lock.json
+├──  package.json
+├──  README.md
+└──
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
