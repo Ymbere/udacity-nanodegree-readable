@@ -80,16 +80,14 @@ export default function posts (state=[], action){
         case DOWN_VOTE_POST_COMMENT :
             return state.map(post => {
                 if (post.id === action.post_id) {
-                    let newPostComments = post.postComments;
 
-                    newPostComments = newPostComments.map(pc => {
-                        if (pc.id === action.comment_id) {
+                    const newPostComments = post.postComments.map(pc => {
+                        if(pc.id === action.comment_id) {
                             return {
                                 ...pc,
                                 voteScore: pc.voteScore - 1
                             }
                         }
-                        return pc
                     })
 
                     return {
